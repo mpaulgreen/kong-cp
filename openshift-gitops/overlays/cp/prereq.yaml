@@ -16,7 +16,7 @@ spec:
     directory:
       recurse: true
     path: gateway/prereqs
-    repoURL: https://github.com/mpaulgreen/kong-cp.git
+    repoURL: https://github.com/cmwylie19/kong-cp.git
     targetRevision: structure # branch
   syncPolicy:
     automated: # automatically sync repo changes
