@@ -52,6 +52,14 @@ metadata:
   name: access-secrets
   namespace: kong
 rules:
+  - apiGroups:
+    - security.openshift.io
+    resourceNames:
+    - anyuid
+    resources:
+    - securitycontextconstraints
+    verbs:
+    - use
   - verbs:
       - get
       - list
