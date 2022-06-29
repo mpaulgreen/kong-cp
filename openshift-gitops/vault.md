@@ -40,6 +40,9 @@ export ARGOCD_SERVER_URL=redhat-kong-gitops-server-openshift-gitops.apps.kongcp.
 oc get secret -n openshift-gitops redhat-kong-gitops-cluster -ojsonpath='{.data.admin\.password}' | base64 -d
 ```
 
-
+Quickly remove finalizers from ArgoCD `Applications`
+```
+kubectl get application -n openshift-gitops --no-headers | awk '{ print $1 }' | xargs kubectl patch application --type json -p '[ { "op": "remove", "path": "/metadata/finalizers" } ]'  -n openshift-gitops
+```
 
 
