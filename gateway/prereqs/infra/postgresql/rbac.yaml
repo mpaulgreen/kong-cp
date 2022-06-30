@@ -1,9 +1,22 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: anyuid
+  name: postgres-perms
   namespace: kong
 rules:
+  - apiGroups:
+    - ""
+    resources:
+    - secrets
+    - services
+    verbs:
+    - patch
+  - apiGroups:
+    - apps
+    resources:
+    - statefulsets
+    verbs:
+    - patch
   - apiGroups:
     - security.openshift.io
     resourceNames:
@@ -25,4 +38,4 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: anyuid
+  name: postgres-perms
