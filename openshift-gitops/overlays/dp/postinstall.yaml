@@ -9,9 +9,9 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: kong
-    server: https://kubernetes.default.svc
-  project: default
+    namespace: kong-keycloak
+    server: https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443
+  project: dataplane
   source:
     directory:
       recurse: true
