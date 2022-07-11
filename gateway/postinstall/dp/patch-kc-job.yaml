@@ -39,7 +39,7 @@ data:
     set -eu
 
     # OCP Domain
-    OCP_DOMAIN=`oc get ingresses.config/cluster -o jsonpath={.spec.domain}`
+    OCP_DOMAIN=`oc get appprojects -n openshift-gitops dataplane -ojsonpath='{.spec.destinations[0].server}' | sed  's/https:\/\///g' | sed 's/:6443//g'`
 
     # Get Server
     SERVER=$(oc get routes -n openshift-gitops redhat-kong-gitops-server -otemplate='{{ .spec.host }}')
@@ -54,7 +54,7 @@ data:
     # Login Argo
     argocd login --username admin --password $PASSWORD $SERVER --insecure
 
-    argocd app patch-resource kong --server https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443 --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\"], \"rootUrl\": "http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
+    argocd app patch-resource kong --server https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443 --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(OCP_DOMAIN)/*\"], \"rootUrl\": "http://demo-app-kong.$(OCP_DOMAIN)/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
 kind: ConfigMap
 metadata:
   namespace: kong

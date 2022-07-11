@@ -10,7 +10,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: kong
+    namespace: kong-keycloak
     server: https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443
   project: dataplane
   source:
