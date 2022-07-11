@@ -10,6 +10,8 @@ metadata:
   namespace: kong
   name: patch-kc
 spec:
+  backoffLimit: 9
+  completions: 1
   template:
     spec:
       restartPolicy: OnFailure
