@@ -67,6 +67,7 @@ rules:
   - keycloakclients
   verbs:
   - patch
+  - get
 - apiGroups:
   - config.openshift.io
   resources:
