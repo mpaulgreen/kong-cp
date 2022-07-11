@@ -68,9 +68,9 @@ rules:
   verbs:
   - patch
 - apiGroups:
-  - networking.k8s.io
+  - config.openshift.io
   resources:
-  - ingresses
+  - ingresses/cluster
   verbs:
   - get
 ---
