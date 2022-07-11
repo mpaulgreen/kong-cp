@@ -10,8 +10,8 @@ metadata:
 spec:
   destination:
     namespace: kong
-    server: https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443
-  project: dataplane
+    server: https://kubernetes.default.svc
+  project: default
   source:
     directory:
       recurse: true
