@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kong-keycloak
+spec: {}
+status: {}
+---
 apiVersion: operators.coreos.com/v1alpha2
 kind: OperatorGroup
 metadata:
@@ -5,7 +12,7 @@ metadata:
   namespace: kong-keycloak
 spec:
   targetNamespaces:
-    - kong
+    - kong-keycloak
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
