@@ -21,7 +21,7 @@ spec:
           defaultMode: 0711 
       containers:
       - image: cmwylie19/kube-argo-base
-        name: patch-kc
+        name: kube-argo-base
         resources: {}
         volumeMounts:
         - name: patch-kc
@@ -52,7 +52,7 @@ data:
     # Login Argo
     argocd login --username admin --password $PASSWORD $SERVER --insecure
 
-    argocd app patch-resource kong --server https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443 --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\"], \"rootUrl\": "http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
+    argocd app patch-resource kong --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\"], \"rootUrl\": "http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
 kind: ConfigMap
 metadata:
   namespace: kong
