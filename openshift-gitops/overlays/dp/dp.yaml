@@ -1,10 +1,12 @@
+
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dp-postinstall
+  name: dp-kong
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "1"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -13,12 +15,11 @@ spec:
     server: https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443
   project: dataplane
   source:
-    directory:
-      recurse: true
-    path: gateway/postinstall/dp
+    path: gateway/dataplane
     repoURL: https://github.com/mpaulgreen/kong-cp.git
-    targetRevision: cw-structure-dp-2 # branch
+    targetRevision: cw-structure-dp-2
   syncPolicy:
     automated: # automatically sync repo changes
       prune: true
       selfHeal: true
+      allowEmpty: true
