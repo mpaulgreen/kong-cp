@@ -36,6 +36,8 @@ kind: KeycloakClient
 metadata:
   name: kuma-demo-client
   namespace: kong-keycloak
+  annotations:
+    hook-type: Skip
   labels:
     app: kong-demo
 spec:
