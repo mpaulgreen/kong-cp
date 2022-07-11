@@ -17,11 +17,11 @@ spec:
       volumes:
       - name: patch-kc
         configMap:
-          name: patch-deploy
+          name: patch-kc
           defaultMode: 0711 
       containers:
       - image: cmwylie19/kube-argo-base
-        name: patch-deploy
+        name: patch-kc
         resources: {}
         volumeMounts:
         - name: patch-kc
