@@ -54,7 +54,7 @@ data:
     # Login Argo
     argocd login --username admin --password $PASSWORD $SERVER --insecure
 
-    argocd app patch-resource kong --server https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443 --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(OCP_DOMAIN)/*\"], \"rootUrl\": "http://demo-app-kong.$(OCP_DOMAIN)/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
+    argocd app patch-resource kong --server https://api.mso-test-cwylie.fsi-env2.rhecoeng.com:6443 --kind KeycloakClient --resource-name kuma-demo-client --namespace=kong-keycloak --patch "{\"spec\": { \"client\" : { \"redirectUris\" : [\"http://demo-app-kong.$(OCP_DOMAIN)/*\"], \"rootUrl\": \"http://demo-app-kong.$(OCP_DOMAIN)/*\" }}}"  --patch-type 'application/strategic-merge-patch+json'
 kind: ConfigMap
 metadata:
   namespace: kong
