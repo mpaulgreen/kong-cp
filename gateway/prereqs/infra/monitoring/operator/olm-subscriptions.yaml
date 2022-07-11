@@ -1,12 +1,14 @@
-apiVersion: operators.coreos.com/v1alpha2
-kind: OperatorGroup
-metadata:
-  name: kong-operator-group
-  namespace: kong
-spec:
-  targetNamespaces:
-    - kong
----
+# OG present in gateway/prereqs/infra/keylcloak/operator
+
+# apiVersion: operators.coreos.com/v1alpha2
+# kind: OperatorGroup
+# metadata:
+#   name: kong-operator-group
+#   namespace: kong
+# spec:
+#   targetNamespaces:
+#     - kong
+# ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
