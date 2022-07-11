@@ -87,9 +87,9 @@ rules:
   verbs:
   - get
 - apiGroups:
-  - networking.k8s.io
+  - argoproj.io
   resources:
-  - ingresses
+  - appprojects
   verbs:
   - get
 ---
