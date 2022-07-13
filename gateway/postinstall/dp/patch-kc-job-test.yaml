@@ -41,7 +41,8 @@ data:
     # OCP Domain
     OCP_DOMAIN=`oc get ingresses.config/cluster -o jsonpath={.spec.domain}`
 
-    kubectl patch keycloakclient -n kong-keycloak kuma-demo-client -n kong-keycloak -p '{"spec":{"client":{"redirectUris":["http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"],"rootUrl":"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"}}}' --type=merge
+    kubectl patch keycloakclient -n kong-keycloak kuma-demo-client -n kong-keycloak --type=json -p '[{"op": "replace", "path": "/spec/client/redirectUris/0", "value":"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"}]'
+    '{"spec":{"client":{"redirectUris":["http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"],"rootUrl":"http://demo-app-kong.$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"}}}' --type=merge
 kind: ConfigMap
 metadata:
   namespace: kong
@@ -51,7 +52,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: patch-kc-2
+  name: patch-kc
 rules:
 - apiGroups:
   - security.openshift.io
@@ -90,11 +91,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: patch-kc-binding-2
+  name: patch-kc-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: patch-kc-2
+  name: patch-kc
 subjects:
 - kind: ServiceAccount
   name: patch-kc
